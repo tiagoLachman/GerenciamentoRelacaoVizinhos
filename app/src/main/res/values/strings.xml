@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">GerenciamentoRelacaoVizinhos</string>
+    <string name="app_name">Gerenciamento Relacao Vizinhos</string>
+    <string name="cbConheceNome">Conhece o nome?</string>
+    <string name="txtTituloNome">Nome:</string>
+    <string name="txtNome">nome</string>
+    <string name="txtTituloEndereco">Endereço:</string>
+    <string name="txtEndereco">endereço</string>
+    <string name="rbTipoContatoCelular">Celular</string>
+    <string name="rbTipoContatoEmail">Email</string>
+    <string name="txtTituloContato">Contato:</string>
+    <string name="txtContato">contato</string>
+    <string name="txtTituloNivelConfianca">Nível de confiança:</string>
+    <string name="btnSalvar">Salvar</string>
+    <string name="btnLimpar">Limpar</string>
+    <string name="txtItem">item</string>
+
 </resources>
