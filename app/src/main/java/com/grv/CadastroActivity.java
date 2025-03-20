@@ -70,6 +70,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtContato.setText("");
         rbTipoContato.clearCheck();
         spNivelConfianca.setSelection(0);
+        cbConheceNome.setChecked(false);
         atualizarDadosTela();
     }
 
@@ -77,9 +78,14 @@ public class CadastroActivity extends AppCompatActivity {
         try {
             validarDados();
         } catch (InterfaceException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            mostrarAviso(e.getMessage());
         }
+        mostrarAviso("Cadastrado com sucesso");
         atualizarDadosTela();
+    }
+
+    private void mostrarAviso(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     private void validarDados() throws InterfaceException {
@@ -91,6 +97,9 @@ public class CadastroActivity extends AppCompatActivity {
         }
         if (isNullOrEmpty(txtEndereco.getText().toString())) {
             throw new InterfaceException("Endereço não informado");
+        }
+        if (rbTipoContato.getCheckedRadioButtonId() == -1) {
+            throw new InterfaceException("Tipo contato não informado");
         }
     }
 
