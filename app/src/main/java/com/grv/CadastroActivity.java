@@ -49,12 +49,15 @@ public class CadastroActivity extends AppCompatActivity {
         cbConheceNome.setOnCheckedChangeListener((buttonView, isChecked) -> {
             atualizarDadosTela();
         });
-        btnLimpar.setOnClickListener(v -> limparDadosTela());
+        btnLimpar.setOnClickListener(v -> {
+            limparDadosTela();
+            mostrarAviso("Tela limpada");
+        });
         btnSalvar.setOnClickListener(v -> salvarDados());
     }
 
     private void atualizarDadosTela() {
-        txtNome.setActivated(cbConheceNome.isChecked());
+        txtNome.setEnabled(cbConheceNome.isChecked());
         ArrayAdapter<NivelConfianca> adapter = new ArrayAdapter<>(
                 this,
                 R.layout.spinner_item,
@@ -79,13 +82,14 @@ public class CadastroActivity extends AppCompatActivity {
             validarDados();
         } catch (InterfaceException e) {
             mostrarAviso(e.getMessage());
+            return;
         }
         mostrarAviso("Cadastrado com sucesso");
-        atualizarDadosTela();
+        limparDadosTela();
     }
 
     private void mostrarAviso(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        Toast.makeText(CadastroActivity.this, text, Toast.LENGTH_LONG).show();
     }
 
     private void validarDados() throws InterfaceException {
