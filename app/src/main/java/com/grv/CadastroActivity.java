@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +46,27 @@ public class CadastroActivity extends AppCompatActivity {
         carregarDadosIntent(getIntent());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cadastro_opcoes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.item_salvar) {
+            salvarDados();
+            return true;
+        } else if (id == R.id.item_limpar) {
+            limparDadosTela();
+            mostrarAviso(R.string.telaLimpada);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void carregarComponentes() {
         cbConheceNome = findViewById(R.id.cbConheceNome);
         txtNome = findViewById(R.id.txtNome);
@@ -66,20 +90,20 @@ public class CadastroActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(v -> salvarDados());
     }
 
-    private void carregarDadosIntent(Intent i){
+    private void carregarDadosIntent(Intent i) {
         Vizinho v;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             v = i.getSerializableExtra(REQUEST_VIZINHO, Vizinho.class);
-        }else{
+        } else {
             v = (Vizinho) i.getSerializableExtra(REQUEST_VIZINHO);
         }
-        if(v != null){
+        if (v != null) {
             vizinhoPersistido = v;
-        }else{
+        } else {
             vizinhoPersistido = null;
         }
 
-        if(vizinhoPersistido != null) {
+        if (vizinhoPersistido != null) {
             String nome = vizinhoPersistido.getNome();
             cbConheceNome.setChecked(nome != null && !nome.isEmpty());
             txtNome.setText(nome);
@@ -87,7 +111,7 @@ public class CadastroActivity extends AppCompatActivity {
             txtEndereco.setText(vizinhoPersistido.getEndereco());
             txtObservacao.setText(vizinhoPersistido.getObservacao());
             NivelConfianca nivel = vizinhoPersistido.getNivelConfianca();
-            if(nivel != null){
+            if (nivel != null) {
                 int position = ((ArrayAdapter<NivelConfianca>) spNivelConfianca.getAdapter()).getPosition(nivel);
                 spNivelConfianca.setSelection(position);
             }
@@ -171,7 +195,7 @@ public class CadastroActivity extends AppCompatActivity {
                 observacao,
                 nc
         );
-        if(vizinhoPersistido != null){
+        if (vizinhoPersistido != null) {
             rvalue.setId(vizinhoPersistido.getId());
         }
         return rvalue;

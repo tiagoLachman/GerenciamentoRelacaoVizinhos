@@ -27,8 +27,6 @@ import java.util.Objects;
 
 public class ListagemActivity extends AppCompatActivity {
 
-    private Button btnAdicionar;
-    private Button btnSobre;
     private ListView listViewVizinhos;
     private VizinhoAdapter vizinhoAdapter;
     private List<Vizinho> listaVizinhos;
@@ -69,20 +67,10 @@ public class ListagemActivity extends AppCompatActivity {
     }
 
     private void carregarComponentes() {
-        btnAdicionar = findViewById(R.id.btnAdicionar);
-        btnSobre = findViewById(R.id.btnSobre);
         listViewVizinhos = findViewById(R.id.listViewVizinhos);
     }
 
     private void carregarEventos() {
-        btnSobre.setOnClickListener(v -> inicializarAuditoriaActivity());
-
-        btnAdicionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inicializarCadastroActivity(null);
-            }
-        });
 
         MenuItem.OnMenuItemClickListener menuItemClickListener = item -> {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
