@@ -59,7 +59,11 @@ public class ListagemActivity extends AppCompatActivity {
 
         listViewVizinhos.setOnItemClickListener((parent, view, position, id) -> {
             Vizinho v = (Vizinho) parent.getItemAtPosition(position);
-            String msg = String.format("Clicou no vizinho %s,", v.getNome());
+            String identificacao = v.getNome();
+            if(identificacao == null || identificacao.isEmpty()){
+                identificacao = "de contato" + v.getContato();
+            }
+            String msg = String.format("Clicou no vizinho %s,", identificacao);
             mostrarAviso(msg);
         });
     }
