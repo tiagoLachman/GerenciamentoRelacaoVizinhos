@@ -56,6 +56,6 @@ public class ListagemActivity extends AppCompatActivity {
         listViewVizinhos.setAdapter(va);
     }
     private void mostrarAviso(String msg) {
-        Toast.makeText(ListagemActivity.this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(ListagemActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 }

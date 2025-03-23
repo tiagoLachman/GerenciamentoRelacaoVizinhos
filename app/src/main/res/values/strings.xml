@@ -21,6 +21,11 @@
     <string name="contatoNaoInformado">Contato não informado</string>
     <string name="enderecoNaoInformado">Endereço não informado</string>
     <string name="tipoContatoNaoInformado">Tipo do contato não informado</string>
+    <string name="txtTitulo1">titulo 1:</string>
+    <string name="txtTitulo2">titulo 2:</string>
+    <string name="txtTitulo3">titulo 3:</string>
+    <string name="txtTitulo4">titulo 4:</string>
+    <string name="txtTitulo5">titulo 5:</string>
 
     <string-array name="nomes_vizinhos">
         <item>Ana Paula</item>

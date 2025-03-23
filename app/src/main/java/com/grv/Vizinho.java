@@ -71,12 +71,6 @@ public class Vizinho {
 
     @Override
     public String toString() {
-        return "Vizinho{" +
-                "nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", contato='" + contato + '\'' +
-                ", observacao='" + observacao + '\'' +
-                ", nivelConfianca=" + nivelConfianca +
-                '}';
+        return String.format("Nome: %d");
     }
 }
