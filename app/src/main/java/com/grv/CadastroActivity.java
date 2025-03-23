@@ -18,6 +18,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText txtNome;
     private EditText txtEndereco;
     private EditText txtContato;
+    private EditText txtObservacao;
     private RadioGroup rbTipoContato;
     private Spinner spNivelConfianca;
     private Button btnSalvar;
@@ -39,6 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtNome = findViewById(R.id.txtNome);
         txtEndereco = findViewById(R.id.txtEndereco);
         txtContato = findViewById(R.id.txtContato);
+        txtObservacao = findViewById(R.id.txtObservacao);
         rbTipoContato = findViewById(R.id.rbTipoContato);
         spNivelConfianca = findViewById(R.id.spNivelConfianca);
         btnSalvar = findViewById(R.id.btnSalvar);
@@ -51,7 +53,7 @@ public class CadastroActivity extends AppCompatActivity {
         });
         btnLimpar.setOnClickListener(v -> {
             limparDadosTela();
-            mostrarAviso("Tela limpada");
+            mostrarAviso(R.string.telaLimpada);
         });
         btnSalvar.setOnClickListener(v -> salvarDados());
     }
@@ -71,6 +73,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtNome.setText("");
         txtEndereco.setText("");
         txtContato.setText("");
+        txtObservacao.setText("");
         rbTipoContato.clearCheck();
         spNivelConfianca.setSelection(0);
         cbConheceNome.setChecked(false);
@@ -81,29 +84,29 @@ public class CadastroActivity extends AppCompatActivity {
         try {
             validarDados();
         } catch (InterfaceException e) {
-            mostrarAviso(e.getMessage());
+            mostrarAviso(e.getIdString());
             return;
         }
-        mostrarAviso("Cadastrado com sucesso");
+        mostrarAviso(R.string.cadastradoComSucesso);
         limparDadosTela();
     }
 
-    private void mostrarAviso(String text) {
-        Toast.makeText(CadastroActivity.this, text, Toast.LENGTH_LONG).show();
+    private void mostrarAviso(int idString) {
+        Toast.makeText(CadastroActivity.this, getString(idString), Toast.LENGTH_LONG).show();
     }
 
     private void validarDados() throws InterfaceException {
         if (isNullOrEmpty(txtNome.getText().toString()) && cbConheceNome.isChecked()) {
-            throw new InterfaceException("Nome não informado");
+            throw new InterfaceException(R.string.nomeNaoInformado);
         }
         if (isNullOrEmpty(txtContato.getText().toString())) {
-            throw new InterfaceException("Contato não informado");
+            throw new InterfaceException(R.string.contatoNaoInformado);
         }
         if (isNullOrEmpty(txtEndereco.getText().toString())) {
-            throw new InterfaceException("Endereço não informado");
+            throw new InterfaceException(R.string.enderecoNaoInformado);
         }
         if (rbTipoContato.getCheckedRadioButtonId() == -1) {
-            throw new InterfaceException("Tipo contato não informado");
+            throw new InterfaceException(R.string.tipoContatoNaoInformado);
         }
     }
 

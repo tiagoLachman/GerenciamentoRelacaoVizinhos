@@ -9,9 +9,82 @@
     <string name="rbTipoContatoEmail">Email</string>
     <string name="txtTituloContato">Contato:</string>
     <string name="txtContato">contato</string>
+    <string name="txtTituloObservacao">Observação:</string>
+    <string name="txtObservacao">observação</string>
     <string name="txtTituloNivelConfianca">Nível de confiança:</string>
     <string name="btnSalvar">Salvar</string>
     <string name="btnLimpar">Limpar</string>
     <string name="txtItem">item</string>
+    <string name="telaLimpada">item</string>
+    <string name="cadastradoComSucesso">Cadastrado com sucesso</string>
+    <string name="nomeNaoInformado">Nome não informado</string>
+    <string name="contatoNaoInformado">Contato não informado</string>
+    <string name="enderecoNaoInformado">Endereço não informado</string>
+    <string name="tipoContatoNaoInformado">Tipo do contato não informado</string>
+
+    <string-array name="nomes_vizinhos">
+        <item>Ana Paula</item>
+        <item>João Carlos</item>
+        <item>Fernanda Lima</item>
+        <item>Rafael Souza</item>
+        <item>Mariana Silva</item>
+        <item>Pedro Henrique</item>
+        <item>Lucas Mendes</item>
+        <item>Beatriz Rocha</item>
+        <item>Camila Torres</item>
+        <item>André Gomes</item>
+    </string-array>
+
+    <string-array name="enderecos_vizinhos">
+        <item>Rua das Flores, 101</item>
+        <item>Av. Central, 202</item>
+        <item>Rua do Sol, 303</item>
+        <item>Av. das Palmeiras, 404</item>
+        <item>Rua da Paz, 505</item>
+        <item>Av. Brasil, 606</item>
+        <item>Rua Nova, 707</item>
+        <item>Rua Esperança, 808</item>
+        <item>Av. Atlântica, 909</item>
+        <item>Rua Harmonia, 1001</item>
+    </string-array>
+
+    <string-array name="contatos_vizinhos">
+        <item>99999-1111</item>
+        <item>99999-2222</item>
+        <item>99999-3333</item>
+        <item>99999-4444</item>
+        <item>99999-5555</item>
+        <item>testekkkkk@321.com</item>
+        <item>99999-7777</item>
+        <item>teste@123.com</item>
+        <item>99999-9999</item>
+        <item>98888-0000</item>
+    </string-array>
+
+    <string-array name="observacoes_vizinhos">
+        <item>Ajuda com correspondências</item>
+        <item>Cuida do gato quando viajamos</item>
+        <item>Conhece toda a vizinhança</item>
+        <item>Tem câmera na frente de casa</item>
+        <item>Confiável para guardar encomendas</item>
+        <item>Tem chave reserva</item>
+        <item>Ajuda com o carro na garagem</item>
+        <item>Vizinha próxima da família</item>
+        <item>Boa relação com todos</item>
+        <item>Discreto e prestativo</item>
+    </string-array>
+
+    <string-array name="niveis_confianca_vizinhos">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 
 </resources>

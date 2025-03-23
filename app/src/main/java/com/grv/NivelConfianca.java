@@ -26,4 +26,25 @@ public enum NivelConfianca {
     public String toString() {
         return desc;
     }
+
+    public static NivelConfianca fromString(String nome) {
+        try {
+            return NivelConfianca.valueOf(nome.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return SEM_DADOS;
+        }
+    }
+
+    public static NivelConfianca fromNivel(String nivel) {
+        try {
+            int nivelNum = Integer.parseInt(nivel);
+            for (NivelConfianca n : values()) {
+                if (n.nivel == nivelNum) {
+                    return n;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return SEM_DADOS;
+    }
 }
