@@ -26,6 +26,14 @@
     <string name="txtTitulo3">titulo 3:</string>
     <string name="txtTitulo4">titulo 4:</string>
     <string name="txtTitulo5">titulo 5:</string>
+    <string name="imageViewLogoUtfpr">Logo UTFPR</string>
+    <string name="txtNomeAluno">Tiago André Lachman</string>
+    <string name="txtCurso">Curso de Especialização em Tecnologia Java</string>
+    <string name="txtEmail">tiagolachman@gmail.com</string>
+    <string name="txtDescricaoApp">Aplicativo de gerenciamento de relações com vizinhos</string>
+    <string name="txtNomeEscola">Universidade Tecnológica Federal do Paraná</string>
+
+
 
     <string-array name="nomes_vizinhos">
         <item>Ana Paula</item>
