@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/item_adicionar"
-        android:title="@string/item_adicionar"
         android:icon="@drawable/add"
+        android:title="@string/item_adicionar"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/item_sobre"
         android:title="@string/item_sobre" />
+    <item
+        android:id="@+id/item_trocar_tema"
+        android:title="@string/item_trocar_tema"
+        app:showAsAction="never" />
 </menu>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Gerenciamento Relacao Vizinhos</string>
+    <string name="cbConheceNome">Conhece o nome?</string>
+    <string name="txtTituloNome">Nome:</string>
+    <string name="txtNome">nome</string>
+    <string name="txtTituloEndereco">Endereço:</string>
+    <string name="txtEndereco">endereço</string>
+    <string name="rbTipoContatoCelular">Celular</string>
+    <string name="rbTipoContatoEmail">Email</string>
+    <string name="txtTituloContato">Contato:</string>
+    <string name="txtContato">contato</string>
+    <string name="txtTituloObservacao">Observação:</string>
+    <string name="txtObservacao">observação</string>
+    <string name="txtTituloNivelConfianca">Nível de confiança:</string>
+    <string name="btnSalvar">Salvar</string>
+    <string name="btnLimpar">Limpar</string>
+    <string name="txtItem">item</string>
+    <string name="telaLimpada">Tela limpada</string>
+    <string name="cadastradoComSucesso">Cadastrado com sucesso</string>
+    <string name="nomeNaoInformado">Nome não informado</string>
+    <string name="contatoNaoInformado">Contato não informado</string>
+    <string name="enderecoNaoInformado">Endereço não informado</string>
+    <string name="tipoContatoNaoInformado">Tipo do contato não informado</string>
+    <string name="txtTitulo1">titulo 1:</string>
+    <string name="txtTitulo2">titulo 2:</string>
+    <string name="txtTitulo3">titulo 3:</string>
+    <string name="txtTitulo4">titulo 4:</string>
+    <string name="txtTitulo5">titulo 5:</string>
+    <string name="btnAdicionar">Adicionar</string>
+    <string name="btnSobre">Sobre</string>
+    <string name="item_adicionar">Adicionar</string>
+    <string name="item_sobre">Sobre</string>
+    <string name="item_editar">Editar</string>
+    <string name="item_excluir">Excluir</string>
+    <string name="item_salvar">Salvar</string>
+    <string name="item_limpar">Limpar</string>
+    <string name="clicou_vizinho">Clicou no vizinho</string>
+    <string name="de_contrato">de contato</string>
+
+    <string name="imageViewLogoUtfpr">Logo UTFPR</string>
+    <string name="txtCurso">Curso de Especialização em Tecnologia Java</string>
+    <string name="txtDescricaoApp">Aplicativo de gerenciamento de relações com vizinhos</string>
+    <string name="txtNomeEscola" >Universidade Tecnológica Federal do Paraná</string>
+    <string name="modo_escuro">modo escuro</string>
+    <string name="ordenar_por">ordenar por</string>
+    <string name="item_trocar_tema">Alternar Tema</string>
+</resources>

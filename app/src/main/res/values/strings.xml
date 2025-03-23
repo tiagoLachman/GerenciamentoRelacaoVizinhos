@@ -1,112 +1,47 @@
 <resources>
-    <string name="app_name">Gerenciamento Relacao Vizinhos</string>
-    <string name="cbConheceNome">Conhece o nome?</string>
-    <string name="txtTituloNome">Nome:</string>
-    <string name="txtNome">nome</string>
-    <string name="txtTituloEndereco">Endereço:</string>
-    <string name="txtEndereco">endereço</string>
-    <string name="rbTipoContatoCelular">Celular</string>
+    <string name="app_name">Neighbor Relationship Manager</string>
+    <string name="cbConheceNome">Knows the name?</string>
+    <string name="txtTituloNome">Name:</string>
+    <string name="txtNome">name</string>
+    <string name="txtTituloEndereco">Address:</string>
+    <string name="txtEndereco">address</string>
+    <string name="rbTipoContatoCelular">Mobile</string>
     <string name="rbTipoContatoEmail">Email</string>
-    <string name="txtTituloContato">Contato:</string>
-    <string name="txtContato">contato</string>
-    <string name="txtTituloObservacao">Observação:</string>
-    <string name="txtObservacao">observação</string>
-    <string name="txtTituloNivelConfianca">Nível de confiança:</string>
-    <string name="btnSalvar">Salvar</string>
-    <string name="btnLimpar">Limpar</string>
+    <string name="txtTituloContato">Contact:</string>
+    <string name="txtContato">contact</string>
+    <string name="txtTituloObservacao">Note:</string>
+    <string name="txtObservacao">note</string>
+    <string name="txtTituloNivelConfianca">Trust level:</string>
+    <string name="btnSalvar">Save</string>
+    <string name="btnLimpar">Clear</string>
     <string name="txtItem">item</string>
-    <string name="telaLimpada">Tela limpada</string>
-    <string name="cadastradoComSucesso">Cadastrado com sucesso</string>
-    <string name="nomeNaoInformado">Nome não informado</string>
-    <string name="contatoNaoInformado">Contato não informado</string>
-    <string name="enderecoNaoInformado">Endereço não informado</string>
-    <string name="tipoContatoNaoInformado">Tipo do contato não informado</string>
-    <string name="txtTitulo1">titulo 1:</string>
-    <string name="txtTitulo2">titulo 2:</string>
-    <string name="txtTitulo3">titulo 3:</string>
-    <string name="txtTitulo4">titulo 4:</string>
-    <string name="txtTitulo5">titulo 5:</string>
+    <string name="telaLimpada">Screen cleared</string>
+    <string name="cadastradoComSucesso">Successfully registered</string>
+    <string name="nomeNaoInformado">Name not provided</string>
+    <string name="contatoNaoInformado">Contact not provided</string>
+    <string name="enderecoNaoInformado">Address not provided</string>
+    <string name="tipoContatoNaoInformado">Contact type not provided</string>
+    <string name="txtTitulo1">title 1:</string>
+    <string name="txtTitulo2">title 2:</string>
+    <string name="txtTitulo3">title 3:</string>
+    <string name="txtTitulo4">title 4:</string>
+    <string name="txtTitulo5">title 5:</string>
+    <string name="btnAdicionar">Add</string>
+    <string name="btnSobre">About</string>
+    <string name="item_adicionar">Add</string>
+    <string name="item_sobre">About</string>
+    <string name="item_editar">Edit</string>
+    <string name="item_excluir">Delete</string>
+    <string name="item_salvar">Save</string>
+    <string name="item_limpar">Clear</string>
+    <string name="clicou_vizinho">Clicked on neighbor</string>
+    <string name="de_contrato">with contact</string>
     <string name="imageViewLogoUtfpr">Logo UTFPR</string>
-    <string name="txtNomeAluno">Tiago André Lachman</string>
-    <string name="txtCurso">Curso de Especialização em Tecnologia Java</string>
-    <string name="txtEmail">tiagolachman@gmail.com</string>
-    <string name="txtDescricaoApp">Aplicativo de gerenciamento de relações com vizinhos</string>
-    <string name="txtNomeEscola">Universidade Tecnológica Federal do Paraná</string>
-    <string name="btnAdicionar">Adicionar</string>
-    <string name="btnSobre">Sobre</string>
-    <string name="item_adicionar">Adicionar</string>
-    <string name="item_sobre">Sobre</string>
-    <string name="item_editar">Editar</string>
-    <string name="item_excluir">Excluir</string>
-    <string name="item_salvar">Salvar</string>
-    <string name="item_limpar">Limpar</string>
-
-
-
-
-    <string-array name="nomes_vizinhos">
-        <item>Ana Paula</item>
-        <item>João Carlos</item>
-        <item>Fernanda Lima</item>
-        <item>Rafael Souza</item>
-        <item>Mariana Silva</item>
-        <item>Pedro Henrique</item>
-        <item>Lucas Mendes</item>
-        <item>Beatriz Rocha</item>
-        <item>Camila Torres</item>
-        <item>André Gomes</item>
-    </string-array>
-
-    <string-array name="enderecos_vizinhos">
-        <item>Rua das Flores, 101</item>
-        <item>Av. Central, 202</item>
-        <item>Rua do Sol, 303</item>
-        <item>Av. das Palmeiras, 404</item>
-        <item>Rua da Paz, 505</item>
-        <item>Av. Brasil, 606</item>
-        <item>Rua Nova, 707</item>
-        <item>Rua Esperança, 808</item>
-        <item>Av. Atlântica, 909</item>
-        <item>Rua Harmonia, 1001</item>
-    </string-array>
-
-    <string-array name="contatos_vizinhos">
-        <item>99999-1111</item>
-        <item>99999-2222</item>
-        <item>99999-3333</item>
-        <item>99999-4444</item>
-        <item>99999-5555</item>
-        <item>testekkkkk@321.com</item>
-        <item>99999-7777</item>
-        <item>teste@123.com</item>
-        <item>99999-9999</item>
-        <item>98888-0000</item>
-    </string-array>
-
-    <string-array name="observacoes_vizinhos">
-        <item>Ajuda com correspondências</item>
-        <item>Cuida do gato quando viajamos</item>
-        <item>Conhece toda a vizinhança</item>
-        <item>Tem câmera na frente de casa</item>
-        <item>Confiável para guardar encomendas</item>
-        <item>Tem chave reserva</item>
-        <item>Ajuda com o carro na garagem</item>
-        <item>Vizinha próxima da família</item>
-        <item>Boa relação com todos</item>
-        <item>Discreto e prestativo</item>
-    </string-array>
-
-    <string-array name="niveis_confianca_vizinhos">
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-        <item>0</item>
-        <item>1</item>
-        <item>1</item>
-        <item>0</item>
-    </string-array>
+    <string name="txtNomeAluno" translatable="false">Tiago André Lachman</string>
+    <string name="txtCurso">Specialization Course in Java Technology</string>
+    <string name="txtEmail" translatable="false">tiagolachman@gmail.com</string>
+    <string name="txtDescricaoApp">Neighbor Relationship Management Application</string>
+    <string name="txtNomeEscola">Universidade Tecnológica Federal of Paraná</string>
+    <string name="item_trocar_tema">Change theme</string>
 
 </resources>
