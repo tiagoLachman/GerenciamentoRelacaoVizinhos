@@ -1,6 +1,7 @@
 package com.grv;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -20,6 +21,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,13 @@ public class ListagemActivity extends AppCompatActivity {
         carregarChamadasActivity();
 
         atualizarDadosTela();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
+
+        AppCompatDelegate.setDefaultNightMode(
+                darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
     }
 
     @Override
@@ -60,6 +70,9 @@ public class ListagemActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.item_sobre) {
             inicializarAuditoriaActivity();
+            return true;
+        } else if (id == R.id.item_trocar_tema) {
+            alternarTema();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -104,9 +117,9 @@ public class ListagemActivity extends AppCompatActivity {
             Vizinho v = (Vizinho) parent.getItemAtPosition(position);
             String identificacao = v.getNome();
             if (identificacao == null || identificacao.isEmpty()) {
-                identificacao = "de contato" + v.getContato();
+                identificacao = getString(R.string.de_contrato) + v.getContato();
             }
-            String msg = String.format("Clicou no vizinho %s,", identificacao);
+            String msg = String.format(getString(R.string.clicou_vizinho) + " %s,", identificacao);
             mostrarAviso(msg);
         });
     }
@@ -141,6 +154,21 @@ public class ListagemActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 arc
         );
+    }
+    private void alternarTema() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
+
+        boolean novoModoEscuro = !darkMode;
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("pref_dark_mode", novoModoEscuro);
+        editor.apply();
+
+        AppCompatDelegate.setDefaultNightMode(
+                novoModoEscuro ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
+        recreate();
     }
 
     private void mostrarAviso(String msg) {
