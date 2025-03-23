@@ -2,6 +2,7 @@ package com.grv;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -68,6 +69,24 @@ public class CadastroActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spNivelConfianca.setAdapter(adapter);
+
+        rbTipoContato.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                atualizarInputTypeTela();
+            }
+        });
+        atualizarInputTypeTela();
+    }
+
+    private void atualizarInputTypeTela() {
+        int checkedId = rbTipoContato.getCheckedRadioButtonId();
+        if (checkedId == R.id.rbTipoContatoCelular) {
+            txtContato.setInputType(InputType.TYPE_CLASS_PHONE);
+            txtContato.setText(txtContato.getText().toString().replaceAll("[^0-9]", ""));
+        } else if (checkedId == R.id.rbTipoContatoEmail) {
+            txtContato.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        }
     }
 
     private void limparDadosTela() {
