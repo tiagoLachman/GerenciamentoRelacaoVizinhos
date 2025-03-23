@@ -1,8 +1,9 @@
 package com.grv;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Vizinho {
+public class Vizinho implements Serializable {
     private String nome;
     private String endereco;
     private String contato;

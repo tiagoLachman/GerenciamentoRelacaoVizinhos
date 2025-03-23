@@ -1,5 +1,6 @@
 package com.grv;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,35 +83,51 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void salvarDados() {
         try {
-            validarDados();
+            retornarObjetoVizinho(validarDados());
         } catch (InterfaceException e) {
             mostrarAviso(e.getIdString());
-            return;
         }
-        mostrarAviso(R.string.cadastradoComSucesso);
-        limparDadosTela();
     }
 
     private void mostrarAviso(int idString) {
         Toast.makeText(CadastroActivity.this, getString(idString), Toast.LENGTH_LONG).show();
     }
 
-    private void validarDados() throws InterfaceException {
-        if (isNullOrEmpty(txtNome.getText().toString()) && cbConheceNome.isChecked()) {
+    private Vizinho validarDados() throws InterfaceException {
+        String nome = txtNome.getText().toString();
+        String contato = txtContato.getText().toString();
+        String endereco = txtEndereco.getText().toString();
+        String observacao = txtObservacao.getText().toString();
+        NivelConfianca nc = (NivelConfianca) spNivelConfianca.getSelectedItem();
+        if (isNullOrEmpty(nome) && cbConheceNome.isChecked()) {
             throw new InterfaceException(R.string.nomeNaoInformado);
         }
-        if (isNullOrEmpty(txtContato.getText().toString())) {
+        if (isNullOrEmpty(contato)) {
             throw new InterfaceException(R.string.contatoNaoInformado);
         }
-        if (isNullOrEmpty(txtEndereco.getText().toString())) {
+        if (isNullOrEmpty(endereco)) {
             throw new InterfaceException(R.string.enderecoNaoInformado);
         }
         if (rbTipoContato.getCheckedRadioButtonId() == -1) {
             throw new InterfaceException(R.string.tipoContatoNaoInformado);
         }
+        return new Vizinho(
+                nome,
+                endereco,
+                contato,
+                observacao,
+                nc
+        );
     }
 
     private boolean isNullOrEmpty(String v) {
         return v == null || v.isEmpty();
+    }
+
+    private void retornarObjetoVizinho(Vizinho vizinho) {
+        Intent i = new Intent();
+        i.putExtra("vizinho", vizinho);
+        setResult(RESULT_OK, i);
+        finish();
     }
 }

@@ -32,6 +32,9 @@
     <string name="txtEmail">tiagolachman@gmail.com</string>
     <string name="txtDescricaoApp">Aplicativo de gerenciamento de relações com vizinhos</string>
     <string name="txtNomeEscola">Universidade Tecnológica Federal do Paraná</string>
+    <string name="btnAdicionar">Adicionar</string>
+    <string name="btnSobre">Sobre</string>
+
 
 
 
