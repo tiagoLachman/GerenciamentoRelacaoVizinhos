@@ -1,6 +1,8 @@
 package com.grv;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroActivity extends AppCompatActivity {
-
+    public static final String RESULT_VIZINHO = "vizinho";
     private CheckBox cbConheceNome;
     private EditText txtNome;
     private EditText txtEndereco;
@@ -67,6 +69,24 @@ public class CadastroActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spNivelConfianca.setAdapter(adapter);
+
+        rbTipoContato.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                atualizarInputTypeTela();
+            }
+        });
+        atualizarInputTypeTela();
+    }
+
+    private void atualizarInputTypeTela() {
+        int checkedId = rbTipoContato.getCheckedRadioButtonId();
+        if (checkedId == R.id.rbTipoContatoCelular) {
+            txtContato.setInputType(InputType.TYPE_CLASS_PHONE);
+            txtContato.setText(txtContato.getText().toString().replaceAll("[^0-9]", ""));
+        } else if (checkedId == R.id.rbTipoContatoEmail) {
+            txtContato.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        }
     }
 
     private void limparDadosTela() {
@@ -82,35 +102,51 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void salvarDados() {
         try {
-            validarDados();
+            retornarObjetoVizinho(validarDados());
         } catch (InterfaceException e) {
             mostrarAviso(e.getIdString());
-            return;
         }
-        mostrarAviso(R.string.cadastradoComSucesso);
-        limparDadosTela();
     }
 
     private void mostrarAviso(int idString) {
         Toast.makeText(CadastroActivity.this, getString(idString), Toast.LENGTH_LONG).show();
     }
 
-    private void validarDados() throws InterfaceException {
-        if (isNullOrEmpty(txtNome.getText().toString()) && cbConheceNome.isChecked()) {
+    private Vizinho validarDados() throws InterfaceException {
+        String nome = txtNome.getText().toString();
+        String contato = txtContato.getText().toString();
+        String endereco = txtEndereco.getText().toString();
+        String observacao = txtObservacao.getText().toString();
+        NivelConfianca nc = (NivelConfianca) spNivelConfianca.getSelectedItem();
+        if (isNullOrEmpty(nome) && cbConheceNome.isChecked()) {
             throw new InterfaceException(R.string.nomeNaoInformado);
         }
-        if (isNullOrEmpty(txtContato.getText().toString())) {
+        if (isNullOrEmpty(contato)) {
             throw new InterfaceException(R.string.contatoNaoInformado);
         }
-        if (isNullOrEmpty(txtEndereco.getText().toString())) {
+        if (isNullOrEmpty(endereco)) {
             throw new InterfaceException(R.string.enderecoNaoInformado);
         }
         if (rbTipoContato.getCheckedRadioButtonId() == -1) {
             throw new InterfaceException(R.string.tipoContatoNaoInformado);
         }
+        return new Vizinho(
+                nome,
+                endereco,
+                contato,
+                observacao,
+                nc
+        );
     }
 
     private boolean isNullOrEmpty(String v) {
         return v == null || v.isEmpty();
+    }
+
+    private void retornarObjetoVizinho(Vizinho vizinho) {
+        Intent i = new Intent();
+        i.putExtra(RESULT_VIZINHO, vizinho);
+        setResult(RESULT_OK, i);
+        finish();
     }
 }
