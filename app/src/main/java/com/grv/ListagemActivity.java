@@ -23,7 +23,7 @@ public class ListagemActivity extends AppCompatActivity {
     private Button btnAdicionar;
     private Button btnSobre;
     private ListView listViewVizinhos;
-
+    private VizinhoAdapter vizinhoAdapter;
     private List<Vizinho> listaVizinhos;
 
     private ActivityResultCallback<ActivityResult> arc;
@@ -68,8 +68,13 @@ public class ListagemActivity extends AppCompatActivity {
         if (listaVizinhos == null) {
             listaVizinhos = new ArrayList<>();
         }
-        VizinhoAdapter va = new VizinhoAdapter(this, listaVizinhos);
-        listViewVizinhos.setAdapter(va);
+        if (vizinhoAdapter == null) {
+            vizinhoAdapter = new VizinhoAdapter(this, listaVizinhos);
+            listViewVizinhos.setAdapter(vizinhoAdapter);
+        } else {
+            vizinhoAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private void carregarChamadasActivity() {
@@ -79,7 +84,7 @@ public class ListagemActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     v = o.getData().getSerializableExtra("vizinho", Vizinho.class);
                 } else {
-                    v = (Vizinho) o.getData().getSerializableExtra("vizinho");
+                    v = (Vizinho) o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO);
                 }
                 adicionarVizinho(v);
                 atualizarDadosTela();
