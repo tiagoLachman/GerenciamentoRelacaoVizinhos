@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroActivity extends AppCompatActivity {
-
+    public static final String RESULT_VIZINHO = "vizinho";
     private CheckBox cbConheceNome;
     private EditText txtNome;
     private EditText txtEndereco;
@@ -126,7 +126,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void retornarObjetoVizinho(Vizinho vizinho) {
         Intent i = new Intent();
-        i.putExtra("vizinho", vizinho);
+        i.putExtra(RESULT_VIZINHO, vizinho);
         setResult(RESULT_OK, i);
         finish();
     }
