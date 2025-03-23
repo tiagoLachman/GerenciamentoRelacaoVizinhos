@@ -34,6 +34,12 @@
     <string name="txtNomeEscola">Universidade Tecnológica Federal do Paraná</string>
     <string name="btnAdicionar">Adicionar</string>
     <string name="btnSobre">Sobre</string>
+    <string name="item_adicionar">Adicionar</string>
+    <string name="item_sobre">Sobre</string>
+    <string name="item_editar">Editar</string>
+    <string name="item_excluir">Excluir</string>
+    <string name="item_salvar">Salvar</string>
+    <string name="item_limpar">Limpar</string>
 
 
 

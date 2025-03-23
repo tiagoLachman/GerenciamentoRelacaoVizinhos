@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Vizinho implements Serializable {
+    private Long id;
     private String nome;
     private String endereco;
     private String contato;
@@ -16,6 +17,14 @@ public class Vizinho implements Serializable {
         this.contato = contato;
         this.observacao = observacao;
         this.nivelConfianca = nivelConfianca;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -62,12 +71,12 @@ public class Vizinho implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Vizinho vizinho = (Vizinho) o;
-        return Objects.equals(nome, vizinho.nome) && Objects.equals(endereco, vizinho.endereco) && Objects.equals(contato, vizinho.contato) && Objects.equals(observacao, vizinho.observacao) && nivelConfianca == vizinho.nivelConfianca;
+        return Objects.equals(id, vizinho.id) && Objects.equals(nome, vizinho.nome) && Objects.equals(endereco, vizinho.endereco) && Objects.equals(contato, vizinho.contato) && Objects.equals(observacao, vizinho.observacao) && nivelConfianca == vizinho.nivelConfianca;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, endereco, contato, observacao, nivelConfianca);
+        return Objects.hash(id, nome, endereco, contato, observacao, nivelConfianca);
     }
 
     @Override

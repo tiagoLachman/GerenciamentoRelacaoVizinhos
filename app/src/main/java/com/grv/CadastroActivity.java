@@ -1,8 +1,11 @@
 package com.grv;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,11 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CadastroActivity extends AppCompatActivity {
     public static final String RESULT_VIZINHO = "vizinho";
+    public static final String REQUEST_VIZINHO = "vizinho";
     private CheckBox cbConheceNome;
     private EditText txtNome;
     private EditText txtEndereco;
@@ -26,6 +31,8 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnSalvar;
     private Button btnLimpar;
 
+    private Vizinho vizinhoPersistido;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +42,29 @@ public class CadastroActivity extends AppCompatActivity {
         carregarEventos();
 
         atualizarDadosTela();
+
+        carregarDadosIntent(getIntent());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cadastro_opcoes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.item_salvar) {
+            salvarDados();
+            return true;
+        } else if (id == R.id.item_limpar) {
+            limparDadosTela();
+            mostrarAviso(R.string.telaLimpada);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void carregarComponentes() {
@@ -58,6 +88,34 @@ public class CadastroActivity extends AppCompatActivity {
             mostrarAviso(R.string.telaLimpada);
         });
         btnSalvar.setOnClickListener(v -> salvarDados());
+    }
+
+    private void carregarDadosIntent(Intent i) {
+        Vizinho v;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            v = i.getSerializableExtra(REQUEST_VIZINHO, Vizinho.class);
+        } else {
+            v = (Vizinho) i.getSerializableExtra(REQUEST_VIZINHO);
+        }
+        if (v != null) {
+            vizinhoPersistido = v;
+        } else {
+            vizinhoPersistido = null;
+        }
+
+        if (vizinhoPersistido != null) {
+            String nome = vizinhoPersistido.getNome();
+            cbConheceNome.setChecked(nome != null && !nome.isEmpty());
+            txtNome.setText(nome);
+            txtContato.setText(vizinhoPersistido.getContato());
+            txtEndereco.setText(vizinhoPersistido.getEndereco());
+            txtObservacao.setText(vizinhoPersistido.getObservacao());
+            NivelConfianca nivel = vizinhoPersistido.getNivelConfianca();
+            if (nivel != null) {
+                int position = ((ArrayAdapter<NivelConfianca>) spNivelConfianca.getAdapter()).getPosition(nivel);
+                spNivelConfianca.setSelection(position);
+            }
+        }
     }
 
     private void atualizarDadosTela() {
@@ -130,13 +188,17 @@ public class CadastroActivity extends AppCompatActivity {
         if (rbTipoContato.getCheckedRadioButtonId() == -1) {
             throw new InterfaceException(R.string.tipoContatoNaoInformado);
         }
-        return new Vizinho(
+        Vizinho rvalue = new Vizinho(
                 nome,
                 endereco,
                 contato,
                 observacao,
                 nc
         );
+        if (vizinhoPersistido != null) {
+            rvalue.setId(vizinhoPersistido.getId());
+        }
+        return rvalue;
     }
 
     private boolean isNullOrEmpty(String v) {

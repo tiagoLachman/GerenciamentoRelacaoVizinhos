@@ -15,10 +15,16 @@
         <activity
             android:name=".AuditoriaActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListagemActivity" />
         </activity>
         <activity
             android:name=".CadastroActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListagemActivity" />
         </activity>
         <activity
             android:name=".ListagemActivity"
