@@ -1,10 +1,21 @@
-package com.grv;
+package com.grv.vo;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Vizinho implements Serializable {
+@Entity
+public class Vizinho implements Cloneable, Serializable {
+
+    @PrimaryKey(autoGenerate = true)
     private Long id;
+
+    @NonNull
+    @ColumnInfo(index = true)
     private String nome;
     private String endereco;
     private String contato;
@@ -77,6 +88,12 @@ public class Vizinho implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, nome, endereco, contato, observacao, nivelConfianca);
+    }
+
+    @NonNull
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

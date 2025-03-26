@@ -1,4 +1,4 @@
-package com.grv;
+package com.grv.vo;
 
 public enum NivelConfianca {
     SEM_DADOS(-1, "Sem dados"),
