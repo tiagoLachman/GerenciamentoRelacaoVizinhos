@@ -144,7 +144,7 @@ public class ListagemActivity extends AppCompatActivity {
             if (o.getResultCode() == RESULT_OK && o.getData() != null) {
                 Vizinho v;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    v = o.getData().getSerializableExtra("vizinho", Vizinho.class);
+                    v = o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO, Vizinho.class);
                 } else {
                     v = (Vizinho) o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO);
                 }
