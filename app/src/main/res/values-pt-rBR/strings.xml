@@ -44,4 +44,9 @@
     <string name="modo_escuro">modo escuro</string>
     <string name="ordenar_por">ordenar por</string>
     <string name="item_trocar_tema">Alternar Tema</string>
+    <string name="aviso">Aviso</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="confirmacao">Confirmação</string>
+    <string name="temCertezaExcluir">Tem certeza quanto à isso?</string>
 </resources>

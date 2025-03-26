@@ -1,5 +1,7 @@
 package com.grv;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -30,6 +32,7 @@ import java.util.Objects;
 
 public class ListagemActivity extends AppCompatActivity {
 
+    public static final String ARQUIVO_PREFERENCIAS = "com.grv.PREFERENCIAS";
     private ListView listViewVizinhos;
     private VizinhoAdapter vizinhoAdapter;
     private List<Vizinho> listaVizinhos;
@@ -48,7 +51,7 @@ public class ListagemActivity extends AppCompatActivity {
 
         atualizarDadosTela();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = getPreferences();
         boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
 
         AppCompatDelegate.setDefaultNightMode(
@@ -98,7 +101,6 @@ public class ListagemActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.item_excluir) {
                 excluirItem(vizinhoSelecionado);
-                atualizarDadosTela();
                 return true;
             } else {
                 return false;
@@ -158,7 +160,7 @@ public class ListagemActivity extends AppCompatActivity {
         );
     }
     private void alternarTema() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = getPreferences();
         boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
 
         boolean novoModoEscuro = !darkMode;
@@ -191,8 +193,17 @@ public class ListagemActivity extends AppCompatActivity {
     }
 
     private void excluirItem(Vizinho v) {
-        VizinhoDAO db = getDataBase();
-        db.delete(v);
+        DialogUtils.confirmarAcao(
+                ListagemActivity.this, R.string.temCertezaExcluir,
+                (dialog, which) -> {
+                    VizinhoDAO db = getDataBase();
+                    db.delete(v);
+                    atualizarDadosTela();
+                },
+                (dialog, which) -> {
+                    atualizarDadosTela();
+                }
+        );
     }
 
     private void adicionarVizinho(Vizinho v) {
@@ -213,5 +224,9 @@ public class ListagemActivity extends AppCompatActivity {
 
     private VizinhoDAO getDataBase(){
         return VizinhosDatabase.getInstance(ListagemActivity.this).getVizinhoDAO();
+    }
+
+    private SharedPreferences getPreferences(){
+        return getSharedPreferences(ARQUIVO_PREFERENCIAS, Context.MODE_PRIVATE);
     }
 }
