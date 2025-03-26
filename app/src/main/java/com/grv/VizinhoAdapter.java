@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.grv.vo.Vizinho;
+
 import java.util.List;
 
 public class VizinhoAdapter extends ArrayAdapter<Vizinho> {

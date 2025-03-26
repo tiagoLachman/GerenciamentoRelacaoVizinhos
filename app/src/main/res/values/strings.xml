@@ -43,5 +43,11 @@
     <string name="txtDescricaoApp">Neighbor Relationship Management Application</string>
     <string name="txtNomeEscola">Universidade Tecnológica Federal of Paraná</string>
     <string name="item_trocar_tema">Change theme</string>
+    <string name="aviso">Warning</string>
+    <string name="confirmacao">Confirmation</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="temCertezaExcluir">Are you sure about that?</string>
 
 </resources>

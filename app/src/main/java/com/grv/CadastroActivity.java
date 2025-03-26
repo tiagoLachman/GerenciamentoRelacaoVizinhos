@@ -18,6 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.grv.vo.NivelConfianca;
+import com.grv.vo.Vizinho;
+
 public class CadastroActivity extends AppCompatActivity {
     public static final String RESULT_VIZINHO = "vizinho";
     public static final String REQUEST_VIZINHO = "vizinho";

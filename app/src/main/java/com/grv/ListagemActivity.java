@@ -1,16 +1,14 @@
 package com.grv;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,12 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
+import com.grv.dao.VizinhoDAO;
+import com.grv.dao.VizinhosDatabase;
+import com.grv.vo.Vizinho;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ListagemActivity extends AppCompatActivity {
 
+    public static final String ARQUIVO_PREFERENCIAS = "com.grv.PREFERENCIAS";
     private ListView listViewVizinhos;
     private VizinhoAdapter vizinhoAdapter;
     private List<Vizinho> listaVizinhos;
@@ -48,7 +51,7 @@ public class ListagemActivity extends AppCompatActivity {
 
         atualizarDadosTela();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = getPreferences();
         boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
 
         AppCompatDelegate.setDefaultNightMode(
@@ -98,7 +101,6 @@ public class ListagemActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.item_excluir) {
                 excluirItem(vizinhoSelecionado);
-                atualizarDadosTela();
                 return true;
             } else {
                 return false;
@@ -125,30 +127,32 @@ public class ListagemActivity extends AppCompatActivity {
     }
 
     private void atualizarDadosTela() {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-        }
+        VizinhosDatabase db = VizinhosDatabase.getInstance(this);
+        listaVizinhos = db.getVizinhoDAO().queryAll();
+
         if (vizinhoAdapter == null) {
             vizinhoAdapter = new VizinhoAdapter(this, listaVizinhos);
             listViewVizinhos.setAdapter(vizinhoAdapter);
         } else {
+            vizinhoAdapter.clear();
+            vizinhoAdapter.addAll(listaVizinhos);
             vizinhoAdapter.notifyDataSetChanged();
         }
-
     }
+
 
     private void carregarChamadasActivity() {
         arc = o -> {
             if (o.getResultCode() == RESULT_OK && o.getData() != null) {
                 Vizinho v;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    v = o.getData().getSerializableExtra("vizinho", Vizinho.class);
+                    v = o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO, Vizinho.class);
                 } else {
                     v = (Vizinho) o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO);
                 }
                 adicionarVizinho(v);
-                atualizarDadosTela();
             }
+            atualizarDadosTela();
         };
         arl = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -156,7 +160,7 @@ public class ListagemActivity extends AppCompatActivity {
         );
     }
     private void alternarTema() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = getPreferences();
         boolean darkMode = prefs.getBoolean("pref_dark_mode", false);
 
         boolean novoModoEscuro = !darkMode;
@@ -188,28 +192,41 @@ public class ListagemActivity extends AppCompatActivity {
         arl.launch(i);
     }
 
-    private void excluirItem(Vizinho vizinho) {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-            return;
-        }
-        if(vizinho == null || vizinho.getId() == null){
-            return;
-        }
-        listaVizinhos.removeIf(item -> Objects.equals(item.getId(), vizinho.getId()));
+    private void excluirItem(Vizinho v) {
+        DialogUtils.confirmarAcao(
+                ListagemActivity.this, R.string.temCertezaExcluir,
+                (dialog, which) -> {
+                    VizinhoDAO db = getDataBase();
+                    db.delete(v);
+                    atualizarDadosTela();
+                },
+                (dialog, which) -> {
+                    atualizarDadosTela();
+                }
+        );
     }
 
     private void adicionarVizinho(Vizinho v) {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-        }
         if (v != null) {
             if (v.getId() != null) {
-                excluirItem(v);
+                atualzarItem(v);
             }else{
-                v.setId((long) listaVizinhos.size());
+                VizinhoDAO db = getDataBase();
+                db.insert(v);
             }
-            listaVizinhos.add(v);
         }
+    }
+
+    private void atualzarItem(Vizinho v) {
+        VizinhoDAO db = getDataBase();
+        db.update(v);
+    }
+
+    private VizinhoDAO getDataBase(){
+        return VizinhosDatabase.getInstance(ListagemActivity.this).getVizinhoDAO();
+    }
+
+    private SharedPreferences getPreferences(){
+        return getSharedPreferences(ARQUIVO_PREFERENCIAS, Context.MODE_PRIVATE);
     }
 }
