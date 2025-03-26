@@ -25,9 +25,6 @@ public interface VizinhoDAO {
     @Query("SELECT * FROM vizinho WHERE id=:id")
     Vizinho queryForId(long id);
 
-    @Query("SELECT * FROM vizinho ORDER BY nome ASC")
-    List<Vizinho> queryAllAscending();
-
-    @Query("SELECT * FROM vizinho ORDER BY nome DESC")
-    List<Vizinho> queryAllDownward();
+    @Query("SELECT * FROM vizinho")
+    List<Vizinho> queryAll();
 }

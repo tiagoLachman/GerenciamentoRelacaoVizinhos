@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
+import com.grv.dao.VizinhoDAO;
+import com.grv.dao.VizinhosDatabase;
 import com.grv.vo.Vizinho;
 
 import java.util.ArrayList;
@@ -123,17 +125,19 @@ public class ListagemActivity extends AppCompatActivity {
     }
 
     private void atualizarDadosTela() {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-        }
+        VizinhosDatabase db = VizinhosDatabase.getInstance(this);
+        listaVizinhos = db.getVizinhoDAO().queryAll();
+
         if (vizinhoAdapter == null) {
             vizinhoAdapter = new VizinhoAdapter(this, listaVizinhos);
             listViewVizinhos.setAdapter(vizinhoAdapter);
         } else {
+            vizinhoAdapter.clear();
+            vizinhoAdapter.addAll(listaVizinhos);
             vizinhoAdapter.notifyDataSetChanged();
         }
-
     }
+
 
     private void carregarChamadasActivity() {
         arc = o -> {
@@ -145,8 +149,8 @@ public class ListagemActivity extends AppCompatActivity {
                     v = (Vizinho) o.getData().getSerializableExtra(CadastroActivity.RESULT_VIZINHO);
                 }
                 adicionarVizinho(v);
-                atualizarDadosTela();
             }
+            atualizarDadosTela();
         };
         arl = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -186,28 +190,28 @@ public class ListagemActivity extends AppCompatActivity {
         arl.launch(i);
     }
 
-    private void excluirItem(Vizinho vizinho) {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-            return;
-        }
-        if(vizinho == null || vizinho.getId() == null){
-            return;
-        }
-        listaVizinhos.removeIf(item -> Objects.equals(item.getId(), vizinho.getId()));
+    private void excluirItem(Vizinho v) {
+        VizinhoDAO db = getDataBase();
+        db.delete(v);
     }
 
     private void adicionarVizinho(Vizinho v) {
-        if (listaVizinhos == null) {
-            listaVizinhos = new ArrayList<>();
-        }
         if (v != null) {
             if (v.getId() != null) {
-                excluirItem(v);
+                atualzarItem(v);
             }else{
-                v.setId((long) listaVizinhos.size());
+                VizinhoDAO db = getDataBase();
+                db.insert(v);
             }
-            listaVizinhos.add(v);
         }
+    }
+
+    private void atualzarItem(Vizinho v) {
+        VizinhoDAO db = getDataBase();
+        db.update(v);
+    }
+
+    private VizinhoDAO getDataBase(){
+        return VizinhosDatabase.getInstance(ListagemActivity.this).getVizinhoDAO();
     }
 }
